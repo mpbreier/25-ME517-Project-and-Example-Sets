@@ -34,6 +34,36 @@ and you multiply each residue by the shift from zero, i.e.,
 \end{equation*}
 \textit{If you dare}, determine the corresponding strain histories $\varepsilon_1(t)$ and $\varepsilon_2(t)$. The first is relatively straightforward; the latter has complex poles and more terms. 
 
+\subsection*{\textbf{1-1 Solution:}}
+Recall that
+\begin{equation*}(f*g)(t)=\int_0^tf(\tau)g(t-\tau)d\tau.\end{equation*}
+If
+\begin{equation*}
+    f(\tau)=\frac{d\sigma(\tau)}{d\tau}\quad\text{and}\quad g(t-\tau)=J(t-\tau),
+\end{equation*}
+then
+\begin{equation*}\varepsilon(t)=(\sigma'*J)(t)=\int_0^t \frac{d\sigma(\tau)}{d\tau}J(t-\tau) d\tau\end{equation*}
+
+So, we may then state that
+\begin{equation*}
+    \mathcal{L}\{\varepsilon(t)\}=\mathcal{L}\{(\sigma'*J)(t)\}=\mathcal{L}\{{\sigma'(t)}\}\cdot\mathcal{L}\{J(t)\}
+\end{equation*}
+For $J(t)$, we see
+\begin{equation*}
+    \mathcal{L}\{J(t)\}=J(s)=\frac{J_{\infty}}{s}+\frac{(J_0-J_{\infty})}{s+\frac{1}{\tau_c}}
+\end{equation*}
+(a) For $\varepsilon_1(t)$, $\sigma_1(t)=\sigma_0H(t)$. So,
+\begin{equation*}
+    \mathcal{L}\{\frac{d}{dt}\sigma_1(t)\}=\mathcal{L}\{\frac{d}{dt}(\sigma_0H(t))\}=s\mathcal{L}\{\sigma_0H(t)\}-\sigma_0H(0)=\sigma_0
+\end{equation*}
+Thus, $\mathcal{L}\{\varepsilon_1(t)\}=\sigma_0[\frac{J_{\infty}}{s}+\frac{(J_0-J_{\infty})}{s+\frac{1}{\tau_c}}]$.
+
+\medskip
+(b) For $\varepsilon_2(t)$, $\sigma_2(t)=\sigma_0\text{sin}(\omega t)$. So,
+\begin{equation*}
+    \mathcal{L}\{\frac{d}{dt}\sigma_2(t)\}=\mathcal{L}\{\frac{d}{dt}(\sigma_0\text{sin}(\omega t))\}=\sigma_0(s\mathcal{L}\{\text{sin}(\omega t)\}-\text{sin}(0))=\frac{s\sigma_0\omega}{s^2+\omega^2}
+\end{equation*}
+Thus, $\mathcal{L}\{\varepsilon_2(t)\}=(\frac{s\sigma_0\omega}{s^2+\omega^2})(\frac{J_{\infty}}{s}+\frac{(J_0-J_{\infty})}{s+\frac{1}{\tau_c}})$
 %\newpage
 \bigskip
 \subsection*{1--2. \textbf{Index notation} [4 pts].} Let $\bm{p}, \bm{q}, \bm{r}, \bm{a}, \bm{b}$ be vector fields on $\mathbbm{R}^3$ and $\bn{Q}$ be a change-of-basis tensor on $\mathbbm{R}^3$. Show the following identities to be true using index notation. 
@@ -44,6 +74,35 @@ and you multiply each residue by the shift from zero, i.e.,
     \item $(\bm{a} \otimes \bm{b})(\bm{p} \otimes \bm{q}) = \bm{a}\otimes\bm{q}(\bm{b} \cdot \bm{p}) $
     \item $\bn{Q}^\intercal\bm{a} \cdot \bn{Q}^\intercal\bm{b} = \bm{a}\cdot\bm{b} $
 \end{itemize}
+
+\subsection*{\textbf{1-2 Solution:}}
+(\textit{i}) \begin{gather*}
+    LHS =q\times r \Rightarrow \epsilon_{ijk}q_jr_k=w_i\\
+    p\times(q\times r)=p\times w \Rightarrow\epsilon_{abc}p_bw_c=\epsilon_{abc}p_b\epsilon_{cjk}q_j r_k \\
+    \epsilon_{abc}\epsilon_{cjk}=\epsilon_{cab}\epsilon_{cjk}=\delta_{aj}\delta_{bk}-\delta_{ak}\delta_{bj}\\
+    (\delta_{aj}\delta_{bk}-\delta_{ak}\delta_{bj})(p_b q_j r_k)\\
+    p_k r_k q_a - p_j q_j r_a = r_k p_k q_a - q_j p_j r_a \Rightarrow (\bm{r}\cdot\bm{p})\bm{q}-(\bm{q}\cdot\bm{p})\bm{r} = RHS
+\end{gather*}
+
+\medskip
+(\textit{ii})\begin{gather*}
+    LHS=(\bm{p} \times \bm{q}) \cdot (\bm{a} \times \bm{b})\Rightarrow\epsilon_{ijk}p_j q_k \epsilon_{imn}a_m b_n\\
+    \epsilon_{ijk}p_j q_k \epsilon_{imn}a_m b_n=\delta_{jm}\delta_{kn}-\delta_{jn}\delta_{km}\\
+    \epsilon_{ijk} \epsilon_{imn}p_j q_k a_m b_n=(\delta_{jm}\delta_{kn}-\delta_{jn}\delta_{km})p_j q_k a_m b_n=p_ja_jq_kb_k-q_ma_mp_nb_n\\
+    p_ja_jq_kb_k-q_ma_mp_nb_n \Rightarrow (\bm{p} \cdot \bm{a}) (\bm{q} \cdot \bm{b}) - (\bm{q} \cdot \bm{a})(\bm{p} \cdot \bm{b})=RHS
+\end{gather*}
+
+\medskip
+(\textit{iii})\begin{gather*}
+    LHS = (\bm{a} \otimes \bm{b})(\bm{p} \otimes \bm{q}) \Rightarrow a_i b_j (\bm{e}^{(i)}\otimes\bm{e}^{(j)})p_k q_l (\bm{e}^{(k)}\otimes\bm{e}^{(l)})=a_i b_j p_k q_l \delta_{jk}(\bm{e}^{(i)}\otimes\bm{e}^{(l)})=\\
+    a_i b_k p_k q_l (\bm{e}^{(i)}\otimes\bm{e}^{(l)})=a_i q_l (\bm{e}^{(i)}\otimes\bm{e}^{(l)}) b_k p_k \Rightarrow (\bm{a}\otimes\bm{q})(\bm{b} \cdot \bm{p})=RHS
+\end{gather*}
+
+\medskip
+(\textit{iv})\begin{gather*}
+    LHS = \bm{Q}^\intercal\bm{a} \cdot \bm{Q}^\intercal\bm{b} \Rightarrow Q_{ij}^\intercal a_j Q_{ip}^\intercal b_p=\\
+    Q_{ji} a_j Q_{pi} b_p = Q_{pi}Q_{ij}^\intercal a_j b_p = \delta_{pj}a_j b_p= a_p b_p \Rightarrow \bm{a}\cdot\bm{b} = RHS
+\end{gather*}
 
 \subsection*{1--3. \textbf{Tensors and vectors} [4 pts].}
 The second-order projection tensors $\bn{P}_{\bm{n}}^{||}$ and $\bn{P}_{\bm{n}}^{\perp}$ are useful operators that take a vector $\bm{u}$ and map that vector to its part parallel and perpendicular to a vector $\bm{n}$, respectively. 
@@ -66,6 +125,20 @@ The projection tensors have properties
 
 Using the projection tensors, show that $\bm{u} = (\bm{u} \cdot \bm{n}) \bm{n} + \bm{n} \times (\bm{u} \times \bm{n} )$.
 
+\subsection*{\textbf{1-3 Solution:}}
+(Note: we must assume $\bm{n}$ is a unit vector for projection tensors.) The first term is already equal to the component of $\bm{u}$ parallel to $\bm{n}$, (i.e. $(\bm{u}\cdot\bm{n})\bm{n}=\bm{u}_{||}$). So, we must now show $\bm{n}\times(\bm{u}\times\bm{n})= \bm{u}_{\perp}$.
+\begin{gather*}
+    \bm{u}\times\bm{n} \Rightarrow \epsilon_{iab}u_a n_b\\
+    \bm{n}\times(\bm{u}\times\bm{n}) \Rightarrow \epsilon_{kji}n_j\epsilon_{iab}u_a n_b\\
+    \epsilon_{kji}\epsilon_{iab}=\epsilon_{ikj}\epsilon_{iab}= \delta_{ka}\delta_{jb}-\delta_{kb}\delta_{ja}\\
+    \epsilon_{kji}n_j\epsilon_{iab}u_a n_b=(\delta_{ka}\delta_{jb}-\delta_{kb}\delta_{ja})n_j n_b u_a=\\
+    n_j n_j u_k - n_k n_j u_j \Rightarrow (\bm{n}\cdot\bm{n})\bm{u}-(\bm{n}\otimes\bm{n})\bm{u}=\bm{u}-(\bm{n}\otimes\bm{n})\bm{u}=(\bn{I}-\bm{n}\otimes\bm{n})\bm{u}=\bm{u}_{\perp}
+\end{gather*}
+Thus,
+\begin{gather*}
+    (\bm{u}\cdot\bm{n})\bm{n}+\bm{n}\times(\bm{u}\times\bm{n})= \bm{u}_{||}+\bm{u}_{\perp}=\bm{u}
+\end{gather*}
+
 \bigskip
 \subsection*{1--4. \textbf{Vector and tensor calculus} [4 pts].} Show the following vector and tensor identities to be true using index notation:
 
@@ -75,6 +148,60 @@ Using the projection tensors, show that $\bm{u} = (\bm{u} \cdot \bm{n}) \bm{n} +
     \item $ (\bn{A} \bn{B}) \bn{:} \bn{C} = (\bn{A}^\intercal \bn{C})\bn{:} \bn{B} = (\bn{C} \bn{B}^\intercal)\bn{:} \bn{A}$
     \item Let $J = \det \bn{F}$. Show\footnote{It will help to use the expression for the determinant of a tensor in index notation!} that $\frac{\partial J}{\partial \bn{F}} = J \bn{F}^{-\intercal}$. 
     \end{itemize}
+
+\subsection*{\textbf{1-4 Solution:}}
+(\textit{i}) \begin{gather*}
+    LHS = \gradX \times (\phi \bm{a}) \Rightarrow \epsilon_{ijk}\frac{\partial(\phi a_k)}{\partial X_j}=\epsilon_{ijk}(\frac{\partial\phi}{\partial X_j}a_k+\frac{\partial a_k}{\partial X_j}\phi)=\\
+    \phi \epsilon_{ijk}\frac{\partial a_k}{\partial X_j}+\epsilon_{ijk}\frac{\partial\phi}{\partial X_j}a_k\Rightarrow \phi \gradX \times \bm{a} + (\gradX\phi) \times \bm{a} = RHS
+\end{gather*}
+
+(\textit{ii}) We will begin by expanding each term on the right in index notation.
+\begin{gather*}
+    (\bm{a} \cdot \gradX) \bm{b}\Rightarrow a_m\frac{\partial}{\partial X_m}b_i=a_m\frac{\partial b_i}{\partial X_m};\\
+    (\bm{b} \cdot \gradX) \bm{a}\Rightarrow b_m\frac{\partial}{\partial X_m}a_i=b_m\frac{\partial a_i}{\partial X_m};\\
+    \bm{a} \times (\gradX \times \bm{b})\Rightarrow \epsilon_{iqr}a_q\epsilon_{rjk}\frac{\partial b_k}{\partial X_j}=\epsilon_{riq}\epsilon_{rjk}a_q\frac{\partial b_k}{\partial X_j}=(\delta_{ij}\delta_{qk}-\delta_{ik}\delta_{jq})a_q\frac{\partial b_k}{\partial X_j}=a_k \frac{\partial b_k}{\partial X_i}- a_j \frac{\partial b_i}{\partial X_j};\\
+    \bm{b} \times (\gradX \times \bm{a})\Rightarrow b_k \frac{\partial a_k}{\partial X_i}- b_j \frac{\partial a_i}{\partial X_j};
+\end{gather*}
+Swapping dummy indices, we see we may cancel the first and second terms of the original equation with corresponding parts of the expanded third and fourth terms. This leaves us with
+\begin{gather*}
+    a_k\frac{\partial b_k}{\partial X_i}+b_k\frac{\partial a_k}{\partial X_i}= \frac{\partial (a_k b_k)}{\partial X_i}\Rightarrow \gradX (\bm{a}\cdot\bm{b})
+\end{gather*}
+We have thus shown that the left hand side and right hand side of this statement are equal.
+
+(\textit{iii})
+For the middle part of this equation,
+\begin{gather*}
+    (\bn{A}^\intercal \bn{C})\bn{:} \bn{B}\Rightarrow A^{\intercal}_{ij}C_{jk}B_{ik}=A_{ji}B_{ik}C_{jk}\Rightarrow (\bn{A} \bn{B}) \bn{:} \bn{C} = LHS.
+\end{gather*}
+For the right side,
+\begin{gather*}
+    (\bn{C} \bn{B}^\intercal)\bn{:} \bn{A}\Rightarrow C_{ij}B^\intercal_{jk}A_{ik}=A_{ik}B_{kj}C_{ij}\Rightarrow (\bn{A} \bn{B}) \bn{:} \bn{C} = LHS.
+\end{gather*}
+
+(\textit{iv})
+In index notation,
+\begin{gather*}
+    J = \frac{1}{6}\epsilon_{ijk}\epsilon_{pqr}F_{ip}F_{jq}F_{kr}
+    \frac{\partial J}{\partial F_{ab}}=\frac{1}{6}\epsilon_{ijk}\epsilon_{pqr}\frac{\partial(F_{ip}F_{jq}F_{kr})}{\partial F_{ab}}
+\end{gather*}
+Using the product rule, this becomes
+\begin{gather*}
+    \frac{\partial J}{\partial F_{ab}}=\frac{1}{6}\epsilon_{ijk}\epsilon_{pqr}(\delta_{ai}\delta_{bp}F_{jq}F_{kr} + \delta_{aj}\delta_{bq}F_{ip}F_{kr} + \delta_{ak}\delta_{br}F_{ip}F_{jq})=\\
+    \frac{1}{6}(\epsilon_{ajk}\epsilon_{bqr}F_{jq}F_{kr}+\epsilon_{iak}\epsilon_{pbr}F_{kr}F_{ip}+\epsilon_{ija}\epsilon_{pqb}F_{ip}F_{jq})
+\end{gather*}
+We can rewrite the order of the indices on the alternators such that we get
+\begin{gather*}
+    \frac{1}{6}(\epsilon_{ajk}\epsilon_{bqr}F_{jq}F_{kr}+\epsilon_{aki}\epsilon_{brb}F_{kr}F_{ip}+\epsilon_{aij}\epsilon_{bpq}F_{ip}F_{jq})
+\end{gather*}
+Swapping dummy indices, we see that these three terms are all equivalent. So, we end up with
+\begin{gather*}
+    \frac{\partial J}{\partial F_{ab}}=\frac{1}{2}\epsilon_{ajk}\epsilon_{bqr}F_{jq}F_{kr}.
+\end{gather*}
+In Bauer's continuum mechanics notes, he states that for a second order tensor $\bn{S}$, $S^{-\intercal}_{ab}=\frac{1}{2\text{det}\bn{S}}\epsilon_{ajk}\epsilon_{bqr}F_{jq}F_{kr}$. Thus, we see that our result can be written as
+\begin{gather*}
+    \frac{\partial J}{\partial F_{ab}}=\frac{1}{2}\epsilon_{ajk}\epsilon_{bqr}F_{jq}F_{kr}= F^{-\intercal}_{ab}\text{det}\bn{F}\\
+    \Rightarrow \frac{\partial J}{\partial \bn{F}}=J\bn{F}^{-\intercal}
+\end{gather*}
 
 %\newpage
 \bigskip
@@ -103,5 +230,105 @@ Would you expect one set to be more symmetric about zero as $\alpha$ gets large,
 \animategraphics[loop,autoplay,width=4in]{10}{instr-figures/The_Happy_Gelatinous_Cube-}{1}{10}
 \end{figure}
 
+\subsection*{\textbf{1-4 Solution:}}
+
+(a) We are told that the bottom face of the HGC, $X_2=0$, does not move. We will assume that the top face of the HGC, $X_2=2$, only moves in the $\bm{e}_2$ direction and will assure at $X_2=0$ and $X_2=2$, $u_1=u_3=0$. We also assume that while each face will be moving sinusoidally, movement in the $\bm{e}_2$ direction will be opposite in sign  to the sinusoidal movement in the $\bm{e}_1$ and $\bm{e}_3$ directions, so as to ensure that when the cube is in maximum $\bm{e}_2$ compression, the centers of the $\bm{e}_1$ and $\bm{e}_3$ surfaces reach maximum displacements.. With all this, we compose a displacement vector of
+\begin{equation*}
+    \bm{u}(\bm{X},t)=\begin{bmatrix}
+        (2-X_2)X_2X_1\beta\text{sin}\omega t\\ -\frac{\alpha}{2}X_2\text{sin}\omega t \\(2-X_2)X_2X_3\beta\text{sin}\omega t
+    \end{bmatrix}.
+\end{equation*}
+Now, finding $[\bn{F}(\bm{X})]^{\bm{e}}=\gradX\bm{u}+\bn{I}$, we get
+\begin{equation*}
+    [\bn{F}(\bm{X})]^{\bm{e}}=\begin{bmatrix}
+        (2-X_2)X_2\beta\text{sin}\omega t& (2-2X_2)X_1\beta\text{sin}\omega t& 0\\ 0& -\frac{\alpha}{2}\text{sin}\omega t&0 \\0 & (2-2X_2)X_3\beta\text{sin}\omega t&(2-X_2)X_2\beta\text{sin}\omega t 
+    \end{bmatrix}+\begin{bmatrix} 1& 0& 0\\ 0& 1& 0\\ 0& 0& 1\end{bmatrix}=
+\end{equation*}
+\begin{equation*}
+    [\bn{F}(\bm{X})]^{\bm{e}}=\begin{bmatrix}
+        (2-X_2)X_2\beta\text{sin}\omega t+1& (2-2X_2)X_1\beta\text{sin}\omega t& 0\\ 0& 1-\frac{\alpha}{2}\text{sin}\omega t&0 \\0 & (2-2X_2)X_3\beta\text{sin}\omega t&(2-X_2)X_2\beta\text{sin}\omega t+1 
+    \end{bmatrix}
+\end{equation*}
+
+\medskip
+(b) At $X_2=1$, $[\bn{F}(\bm{X})]^{\bm{e}}$ becomes
+\begin{equation*}
+    [\bn{F}(\bm{X})]^{\bm{e}}_{X_2=1}=\begin{bmatrix}
+        \beta\text{sin}\omega t+1& 0& 0\\ 0& 1-\frac{\alpha}{2}\text{sin}\omega t&0 \\0 & 0&\beta\text{sin}\omega t+1 \end{bmatrix}
+\end{equation*}
+To find the stretch magnitude of a small fiber at $X_2=1$ and oriented at angle $\theta$ from the $\bm{e}_1$ axis in the $\bm{e}_1-\bm{e}_3$ plane, we want to find $\lambda=\sqrt{\bm{n}\cdot\bn{C}\bm{n}}$ where $\bm{n}$ is the fiber direction and $\bn{C}=\bn{F}^\intercal\bn{F}$. Since at $X_2=1$ $[\bn{F}(\bm{X})]^{\bm{e}}$ is diagonal, it is also symmetric and thus $\bn{F}(\bm{X})=\bn{F}^{\intercal}(\bm{X})$. So,
+\begin{gather*}
+    \lambda=\sqrt{\bm{n}\cdot\bn{C}\bm{n}}=\sqrt{\bm{n}\cdot\bn{F}^{\intercal}\bn{F}\bm{n}}=\sqrt{\bm{n}\cdot\bn{F}^2\bm{n}}\\
+    ([\bn{F}(\bm{X})]^{\bm{e}}_{X_2=1})^2=\begin{bmatrix}
+        (\beta\text{sin}\omega t+1)^2& 0& 0\\ 0& (1-\frac{\alpha}{2}\text{sin}\omega t)^2&0 \\0 & 0&(\beta\text{sin}\omega t+1)^2 \end{bmatrix}\\
+        \bn{F}^2\bm{n}=\begin{bmatrix}
+        (\beta\text{sin}\omega t+1)^2& 0& 0\\ 0& (1-\frac{\alpha}{2}\text{sin}\omega t)^2&0 \\0 & 0&(\beta\text{sin}\omega t+1)^2 \end{bmatrix}\begin{bmatrix}
+            \text{cos}\theta\\0\\\text{sin}\theta
+        \end{bmatrix}=\begin{bmatrix}
+            \text{cos}\theta(\beta\text{sin}\omega t+1)^2\\0\\\text{sin}\theta(\beta\text{sin}\omega t+1)^2
+        \end{bmatrix}\\
+        \sqrt{\bm{n}\cdot\bn{F}^2\bm{n}}=\sqrt{(\text{cos}^2\theta+\text{sin}^2\theta)(\beta\text{sin}\omega t +1)^2}=\beta\text{sin}\omega t +1
+\end{gather*}
+So, the stretch magnitude of a small fiber at $X_2=1$ and oriented at angle $\theta$ from the $\bm{e}_1$ axis in the $\bm{e}_1-\bm{e}_3$ plane is 
+\begin{equation*}
+    \lambda=\beta\text{sin}\omega t +1
+\end{equation*}
+
+\medskip
+(c) At the geometric center of the cube,
+\begin{equation*}
+    [\bn{F}(\bm{X}_{c})]^{\bm{e}}=\begin{bmatrix}
+        \beta\text{sin}\omega t+1& 0& 0\\ 0& 1-\frac{\alpha}{2}\text{sin}\omega t&0 \\0 & 0&\beta\text{sin}\omega t+1 \end{bmatrix}.
+\end{equation*}
+At this center, the deformation tensor is again symmetric and diagonal, so, we get
+\begin{gather*}
+    \bn{E}=\frac{1}{2}(\bn{C}-\bn{I})=\frac{1}{2}(\bn{F}^\intercal\bn{F}-\bn{I})=\frac{1}{2}(\bn{F}^2-\bn{I})\\
+    \bn{E}=\frac{1}{2}\begin{bmatrix}
+        (\beta\text{sin}\omega t+1)^2-1& 0& 0\\ 0& (1-\frac{\alpha}{2}\text{sin}\omega t)^2-1&0 \\0 & 0&(\beta\text{sin}\omega t+1)^2-1
+    \end{bmatrix}
+\end{gather*}
+Since this strain tensor is already diagonal, at the center of the cube the eigenvectors of the Lagrange-Green strain tensor are the same as our directions $\bm{e}_1$,$\bm{e}_2$, and $\bm{e}_3$. The eigenvalues will then be the three diagonal components of this tensor. A simple analysis shows us that 
+\begin{align*}
+    E_{min}^{(1)}&=\frac{1}{2}(\beta^2-2\beta)\\
+    E_{max}^{(1)}&=\frac{1}{2}(\beta^2+2\beta)\\
+    E_{min}^{(2)}&=\frac{1}{2}(\frac{\alpha^2}{4}-\alpha)\\ 
+    E_{max}^{(2)}&=\frac{1}{2}(\frac{\alpha^2}{4}+\alpha)\\
+    E_{min}^{(3)}&=\frac{1}{2}(\beta^2-2\beta)\\
+    E_{max}^{(3)}&=\frac{1}{2}(\beta^2+2\beta)\\
+\end{align*}
+
+We find the material logarithmic strain tensor and its eigenvalues at the geometric center in a similar manner.
+\begin{gather*}
+    \bn{E}_H=\text{ln}(\bn{U})=\text{ln}(\bn{C}^{\frac{1}{2}})=\text{ln}(\bn{F})\\
+    \text{ln}(\bn{F})=\begin{bmatrix}
+        \text{ln}(\beta\text{sin}\omega t+1)& 0& 0\\ 0& \text{ln}(1-\frac{\alpha}{2}\text{sin}\omega t)&0 \\0 & 0&\text{ln}(\beta\text{sin}\omega t+1)
+    \end{bmatrix}
+\end{gather*}
+Similarly, we get minimum and maximum eigenvalues as
+\begin{align*}
+    E_{min}^{H(1)}&=\text{ln}(1-\beta)\\
+    E_{max}^{H(1)}&=\text{ln}(1+\beta)\\
+    E_{min}^{H(2)}&=\text{ln}(1-\frac{\alpha}{2})\\ 
+    E_{max}^{H(2)}&=\text{ln}(1+\frac{\alpha}{2})\\
+    E_{min}^{H(3)}&=\text{ln}(1-\beta)\\
+    E_{max}^{H(3)}&=\text{ln}(1+\beta)\\
+\end{align*}
+As $\alpha$ gets large, the minimum and maximum of $E^{(2)}$ approach the same value. Thus, we'd expect the set of Lagrange-Green strain eigenvalues to be more symmetric about zero. In contrast, the logarithmic strain eigenvalues, specifically, $E^{H(2)}$, has a minimum that approaches minus infinity as $\alpha$ approaches 2, while the maximum grows more slowly. Thus, I am led to believe this strain will look less symmetric about zero as $\alpha$ gets larger.
+
+\medskip
+(d) 
+\begin{gather*}
+    \bm{u}=\bm{x}-\bm{X}\\
+    \bm{x}=\bm{u}+\bm{X}=\begin{bmatrix}
+        (2-X_2)X_2X_1\beta\text{sin}\omega t+X_1\\-\frac{\alpha}{2}X_2\text{sin}\omega t+ X_2\\(2-X_2)X_2X_3\beta\text{sin}\omega t+X_3
+    \end{bmatrix}\\
+    \bm{A}=\frac{\partial \bm{V}}{\partial t}=\frac{\partial^2 \bm{x}}{\partial t^2}=\begin{bmatrix}
+        (X_2-2)X_2X_1\beta\omega^2\text{sin}\omega t\\ \frac{1}{2}X_2\alpha\omega^2\text{sin}\omega t\\ (X_2-2)X_2X_3\beta\omega^2\text{sin}\omega t
+    \end{bmatrix}\\
+    \bm{A}(\bm{X_1})=\begin{bmatrix}
+        0\\ \alpha\omega^2\text{sin}\omega t\\ 0
+    \end{bmatrix}
+\end{gather*}
+Note this result aligns with our assumption that at $X_2=2$ the face of the cube only moves in the $\bm{e}_2$ direction.
 % This is a placeholder for the example problems from the first problem set. 
 % You'll replace this file with the one I supply on canvas. 
