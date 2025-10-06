@@ -27,6 +27,39 @@ and hence, show that an assumption of incompressibility for PDMS results in
 v_r(r,t) = \frac{R^2 \dot{R}}{r^2}.
 \end{equation*}
 
+\subsection*{\textbf{2-1 Solution:}}
+(\textit{i}) Conservation of mass states:
+\begin{gather*}
+\frac{\partial\rho}{\partial t}+\nabla\cdot(\rho \bm{v})=0    
+\end{gather*}
+As we are working in spherical, and the velocity is stated to only have radial dependence, it is useful to define the divergence in spherical which is
+\begin{gather*}
+    \nabla\cdot(\bullet)=\frac{1}{r^2}\frac{\partial}{\partial r}(r^2(\bullet))+\frac{1}{r\text{sin}\theta}\frac{\partial}{\partial\theta}((\bullet)\text{sin}\theta)+\frac{1}{r\text{sin}\theta}\frac{\partial(\bullet)}{\partial\phi}
+\end{gather*}
+Applying this definition to the conservation of mass in conjunction with the sole radial dependence of velocity, we get
+\begin{gather*}
+    \rho_{,t}+\nabla\cdot(\rho\bm{v})=\rho_{,t}+\frac{1}{r^2}\frac{\partial}{\partial r}(r^2\rho v_r)=
+    \rho_{,t}+\frac{2}{r}\rho v_r+ \rho_{,r}v_r+\rho v_{r,r}=0
+\end{gather*}
+Rearranging, we get
+\begin{gather*}
+    \rho_{,t}+\rho_{,r}v_r+\frac{2}{r}\rho v_r+\rho v_{r,r}=0\\
+    \rho_{,t}+\rho_{,r}v_r+\frac{\rho}{r}(2 v_r+r v_{r,r})=0
+\end{gather*}
+We have thus demonstrated that a material must satisfy the provided equation via the conservation of mass equation.
+
+(\textit{ii}) We begin with the conservation of mass once more. However, assuming incompressibility, $\rho$ is constant. Thus,
+\begin{gather*}
+    \frac{\partial\rho}{\partial t}+\nabla\cdot(\rho \bm{v})=\nabla\cdot \bm{v}=0 \\
+    \frac{1}{r^2}\frac{\partial}{\partial r}(r^2v_r)=0\Rightarrow r^2v_r=C=\text{constant}    
+\end{gather*}
+We know that at $r=R$, $v_r=\dot{R}$. Then,
+\begin{gather*}
+    r^2v_r=C=R^2\dot{R}\\
+    v_r=v_r(r,t)=\frac{R^2\dot{R}}{r^2}
+\end{gather*}
+We have hence shown the desired expression for $v_r$.
+
 \medskip
 \subsection*{2--2. \textbf{Balance of momenta} [4 pts].} A spherical hydrogel body $\mathcal{B}$ with a linear density gradient is currently submerged in water as depicted in the figure. 
 The sphere has coordinates $\bm{x}$ in a region $\Omega$ with position-dependent density $\rho(\bm{x})$. 
@@ -51,6 +84,82 @@ where $\hat{\bm{n}}$ is the outer unit normal to the surface $\partial \Omega_t$
 \medskip
 (b) Under what \textit{two} conditions is $\mathcal{B}$ in static equilibrium?
 
+\subsection*{\textbf{2-2 Solution:}}
+(\textit{a}) We will take the center of the sphere as our origin. Beginning with the balance of linear momentum.
+\begin{gather*}
+    \int_{\partial\Omega_t}\bm{t}d\bm{A_x}+\int_\Omega\bm{b}d\bm{V_x}=\int_\Omega\rho\bm{a}d\bm{V_x}=\text{net force}
+\end{gather*}
+We may convert the surface integral of the traction into a volume integral via the divergence theorem.
+\begin{gather*}
+    \bm{t}=-\rho_wgx_3\hat{\bm{n}}=\bm{\sigma}\cdot\hat{\bm{n}}\quad\therefore\quad\bm{\sigma}=-\rho_w gx_3 \bm{I}
+\end{gather*}
+Now, via the divergence theorem, we have
+\begin{gather*}
+    \int_\Omega\nabla_{\bm{x}}\cdot\bm{\sigma}d\bm{V_x}+\int_\Omega\bm{b}d\bm{V_x}=\int_\Omega\rho\bm{a}d\bm{V_x}
+\end{gather*}
+Our only body force is the weight of the hydrogel, which can be written as
+\begin{gather*}
+    \bm{b}=\rho(\bm{x})g\bm{e}_3=\rho_w(1+\frac{x_2}{2R})g\bm{e}_3
+\end{gather*}
+We can solve each of these integrals separately.
+\begin{gather*}
+    \int_\Omega\nabla_{\bm{x}}\cdot\bm{\sigma}d\bm{V_x}= \int_{\Omega}-\rho_w g \bm{e}_3d\bm{V_x}=-\frac{4}{3}\pi R^3\rho_wg\bm{e}_3\\
+    \int_\Omega\bm{b}d\bm{V_x}=\int_{\Omega}\rho(\bm{x})g\bm{e}_3d\bm{V_x}=\rho_{avg}g\bm{e}_3\int_{\Omega} d\bm{V_x}
+\end{gather*}
+Since the density profile of this sphere is linear, one can easily find the average density to be $\rho_{avg}=\rho_w$. Thus,
+\begin{gather*}
+    \int_\Omega\bm{b}d\bm{V_x}=\rho_w g \bm{e}_3\int_{\Omega}d\bm{V_x}=\frac{4}{3}\pi R^3\rho_wg\bm{e}_3.
+\end{gather*}
+Adding these integrals, we see that
+\begin{gather*}
+    \text{net force }=-\frac{4}{3}\pi R^3\rho_wg\bm{e}_3+\frac{4}{3}\pi R^3\rho_wg\bm{e}_3=\bm{0}
+\end{gather*}
+
+Similarly, we find the net moment starting with the angular momentum balance.
+\begin{gather*}
+    \int_{\partial\Omega_t}\bm{x}\times\bm{t}d\bm{A_x}+\int_\Omega\bm{x}\times\bm{b}d\bm{V_x}=\int_\Omega\bm{x}\times(\rho\bm{a}d)\bm{V_x}=\text{net moment}
+\end{gather*}
+First, we find the moment due to the traction as
+\begin{gather*}
+    \int_{\partial\Omega_t}\bm{x}\times\bm{t}dA\bm{_x}=\int_{\partial\Omega_t}\bm{x}\times(\hat{\bm{n}}\cdot\bm{\sigma})dA\bm{_x}=\int_{\partial\Omega_t}\epsilon_{ijk}x_j n_p \sigma_{pk}\bm{e}_idA\bm{_x}\\
+    =\int_{\Omega}\epsilon_{ijk}\frac{\partial}{\partial x_p}(x_j \sigma_{pk})\bm{e}_idV\bm{_x}\\
+    =\int_{\Omega}\epsilon_{ijk}\frac{\partial}{\partial x_p}(-\rho_w g x_j x_3\delta_{pk})\bm{e}_idV\bm{_x}\\
+    =\int_{\Omega}\epsilon_{ijk}\frac{\partial}{\partial x_k}(-\rho_w g x_j x_3)\bm{e}_idV\bm{_x}\\
+    =-\rho_w g\int_{\Omega}\epsilon_{ijk}(\delta_{jk} x_3+x_j\delta_{3k})\bm{e}_idV\bm{_x}\\
+    =-\rho_w g\int_{\Omega}\epsilon_{ijk}(x_j\delta_{3k})\bm{e}_idV\bm{_x}\\
+    =-\rho_w g\int_{\Omega}\epsilon_{ij3}(x_j)\bm{e}_idV\bm{_x}\\
+    =-\rho_w g\int_{\Omega}(x_2\bm{e}_1-x_1\bm{e}_2)dV\bm{_x}
+\end{gather*}
+It is now advantageous to convert this integral into spherical coordinates, leading to
+\begin{gather*}
+    \int_{\partial\Omega_t}\bm{x}\times\bm{t}dA\bm{_x}=-\rho_w g\int_{\Omega}(x_2\bm{e}_1-x_1\bm{e}_2)dV\bm{_x}=-\rho_w g\int_{\Omega}(r\text{ cos}(\phi)\bm{e}_1-r\text{sin}(\phi)\text{sin}(\theta)\bm{e}_2)dV\bm{_x}\\
+    =-\rho_w g\int_0^R\int_0^{\pi}\int_0^{2\pi}(r^3\text{sin}(\phi)\text{ cos}(\phi)\bm{e}_1-r^3\text{sin}^2(\phi)\text{sin}(\theta)\bm{e}_2)d\theta d\phi dr\\
+    =-2\pi\rho_w g\int_0^R\int_0^{\pi}r^2\text{sin}(\phi)\text{ cos}(\phi)\bm{e}_1 d\phi dr=0
+\end{gather*}
+Thus, the traction does not contribute to the net moment on the sphere at all. Now, we follow similar steps to find the body force's contribution to the net moment acting on the sphere.
+\begin{gather*}
+    \int_\Omega\bm{x}\times\bm{b}dV\bm{_x}=\int_{\Omega}\epsilon_{ijk}x_jb_k\bm{e}_idV\bm{_x}=\int_{\Omega}\epsilon_{ij3}x_j\rho(\bm{x})g\bm{e}_idV\bm{_x}\\
+    =g\int_{\Omega}\rho_w(1+\frac{x_2}{2R})(x_2\bm{e}_1-x_1\bm{e}_2)dV\bm{_x}
+\end{gather*}
+At this point, it is once more easier to convert this to a spherical volume integral.
+\begin{gather*}
+    \int_\Omega\bm{x}\times\bm{b}dV\bm{_x}=\rho_wg\int_0^{2\pi}\int_0^{\pi}\int_0^R(1+\frac{r\text{ cos}(\phi)}{2R})(r\text{ cos}(\phi)\bm{e}_1-r\text{ sin}(\phi)\text{sin}(\theta)\bm{e}_2)r^2\text{sin}(\phi)dr d\phi d\theta\\
+    =\rho_wg\int_0^{2\pi}\int_0^{\pi}\int_0^R[(r^3\text{cos}(\phi)\text{ sin}(\phi)+\frac{r^4}{2R}\text{cos}^2(\phi)\text{sin}(\phi))\bm{e}_1\\-(r^3\text{sin}^2(\phi)\text{sin}(\theta)+\frac{r^4}{2R}\text{sin}^2(\phi)\text{cos}(\phi)\text{sin}(\theta))\bm{e}_2]dr d\phi d\theta\\
+    =\rho_w g\int_0^{2\pi}\int_0^{\pi}[(\frac{R^4}{4}\text{cos}(\phi)\text{ sin}(\phi)+\frac{R^4}{20}\text{cos}^2(\phi)\text{sin}(\phi))\bm{e}_1\\
+    -(\frac{R^4}{4}\text{sin}^2(\phi)\text{sin}(\theta)+\frac{R^4}{20}\text{sin}^2(\phi)\text{cos}(\phi)\text{sin}(\theta))\bm{e}_2] d\phi d\theta\\
+\end{gather*}
+Note here that we may remove terms in this integral that we know will become 0 when we integrate from 0 to $2\pi$ and from 0 to $\pi$ w.r.t. $\theta$ and $\phi$ respectively.
+\begin{gather*}
+    =\rho_w g\int_0^{2\pi}\int_0^{\pi}[\frac{R^4}{20}\text{cos}^2(\phi)\text{sin}(\phi)\bm{e}_1] d\phi d\theta\\
+    =\frac{2\pi\rho_wgR^4}{20}\bm{e}_1\int_o^{\pi}\text{cos}^2(\phi)\text{sin}(\phi) d\phi\\
+    =\frac{\pi\rho_wgR^4}{15}\bm{e}_1.
+\end{gather*}
+Thus, our total moment is
+\begin{gather*}
+    \text{net moment }=\frac{\pi\rho_wgR^4}{15}\bm{e}_1.
+\end{gather*}
+
+(\textit{b}) The body will be in static equilibrium under the conditions of the net force acting on the body being zero and the net moment acting on the body being zero. In its current state, $\mathcal{B}$ only satisfies the former, as we found the net moment to be nonzero. This makes sense intuitively, as due to the asymmetric mass distribution in the sphere, the center of mass sits to the right (toward the positive $\bm{e}_2$ axis) of the body's geometric center. Thus, the force of gravity would be expected to induce a moment on the sphere, causing it to rotate about the $\bm{e}_1$ axis as we predicted. If the sphere was rotated $90^{\circ}$ about this axis, then it would be in static equilibrium.
 
 % \subsection*{2--1. \textbf{Balance of momentum} [4 pts].} A Cauchy stress field in a material has a matrix of scalar components in the 3D basis $\{\bn{e}_i\}$:
 % \begin{equation}
@@ -94,6 +203,38 @@ Stress relaxation isochrones for a compliant viscoelastic material are shown in 
 % This is a placeholder for the example problems from the second problem set. 
 % You'll replace this file with the one I supply on canvas. 
 
+\subsection*{\textbf{2-3 Solution:}}
+(\textit{a}) If the isochrones appear to be approximately linear in a strain regime, then it is safe to describe the material behavior with linear viscoelasticity (LVE). In general, as these isochrones are clearly nonlinear, we cannot describe this material with linear viscoelasticity. This nonlinearity implies that the creep compliance $J_c$ for this material is dependent on not just time but on stress $\sigma$ as well (i.e. $J_c=J_c(t,\sigma)$. To describe the material with LVE we require $J_c=J_c(t)$, exemplified by linear isochrones.
+
+So, this assumption would be valid approximately for the strain regime from $\sim 0-1.8\cdot10^{-3}$ and again for the regime from $\sim 3.3-4.0\cdot10^{-3}$.
+
+(\textit{b}) We can approximate values of $J_c$ at the given isochrone times via $J_c(t)=\frac{\varepsilon(t)}{\sigma_0}$. These values are displayed in Table \ref{tab:2-3Sol}. 
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|}
+    \hline
+        t & $\sigma_0=100$ Pa &  & $\sigma_0=250$ Pa & \\
+        \hline
+         & $\varepsilon$ & $J_c$ & $\varepsilon$ & $J_c$\\
+         \hline
+        2 & .44E-3 & .44E-5 & 1.2E-3 & 4.8E-6\\
+        5 & .53E-3 & .53E-5 & 1.45E-3 & 5.8E-6\\
+        10 & .67E-3 & .67E-5 & 1.8E-3 & 7.2E-6\\
+        20 & .81E-3 & .81E-5 & 2.4E-3 & 9.6E-6\\
+        40 & 1.0E-3 & 1.0E-5 & 3.0E-3 & 1.2E-5\\
+        \hline
+    \end{tabular}
+    \caption{Approximated values for estimating $J_c$}
+    \label{tab:2-3Sol}
+\end{table}
+
+Using Matlab, we may plot ln($J_c$) vs. ln($t$), linear fit this ln-ln plot, and then we may use these constants to solve for $J_c$. Doing this, we obtain the following fits.
+\begin{gather*}
+    \text{For }\sigma_0=100\text{ Pa, } J_c=3.52\cdot10^{-6}t^{.2788}.\\
+    \text{For }\sigma_0=250\text{ Pa, } J_c=3.67\cdot10^{-6}t^{.3145}.
+\end{gather*}
+
 \bigskip
 \subsection*{2--4. \textbf{Impulsive stresses} [4 pts].}
 
@@ -103,6 +244,45 @@ Determine the strain history $\epsilon(t)$, first as a general function of the c
 (b) Now, consider a rapid load followed by a rapid reverse load by applying a doublet function of stress, i.e. $\sigma(t) = B \psi(t)$. 
 What is the strain function $\epsilon(t)$ in terms of $J_c(t)$ and for a Kelvin-Voigt material now? 
 
+\subsection*{\textbf{2-4 Solution:}}
+(\textit{a}) First, we can find the strain history $\varepsilon(t)$ as a general function of the creep relaxation as follows.
+\begin{align*}
+    \varepsilon(t)&=\int_{0^-}^tJ_c(t-\tau)\frac{d\sigma(\tau)}{d\tau}d\tau\\
+    &=A\int_{0^-}^tJ_c(t-\tau)\psi(\tau)d\tau
+\end{align*}
+
+We then can find this using the constitutive law for a Kelvin-Voigt material as follows.
+\begin{gather*}
+    \eta\dot{\varepsilon}+E\varepsilon=\sigma=A\delta\\
+    \dot{\varepsilon}\text{ exp}( \frac{Et}{\eta})+\frac{E}{\eta}\varepsilon\text{ exp}(\frac{Et}{\eta})=\frac{A}{\eta}\delta\text{ exp}(\frac{Et}{\eta})\\
+    \frac{d}{dt}[\text{exp}(\frac{Et}{\eta})\varepsilon]=\frac{A}{\eta}\delta\text{ exp}(\frac{Et}{\eta})\\
+    \text{exp}(\frac{Et}{\eta})\varepsilon=\frac{A}{\eta}[H(t)\text{ exp}(\frac{Et}{\eta})]+C\\
+    \varepsilon(t)=\frac{A}{\eta}H(t)+C\text{ exp}(\frac{-Et}{\eta})
+\end{gather*}
+where $C$ is a constant.
+
+(\textit{b}) We solve for the strain in a similar manner as part (a).
+\begin{align*}
+    \varepsilon(t)&=\int_{0^-}^tJ_c(t-\tau)\frac{d\sigma(\tau)}{d\tau}d\tau\\
+    &=B\int_{0^-}^tJ_c(t-\tau)\delta^{('')}(\tau)d\tau=B\int_{0^-}^tJ_c(\tau)\delta^{('')}(t-\tau)d\tau
+\end{align*}
+Due to the nature of the dirac delta family of "functions", which are equal to 0 everywhere but at 0, we may state
+\begin{align*}
+    \varepsilon(t)&=B\int_{0^-}^tJ_c(\tau)\delta^{('')}(t-\tau)d\tau\\
+    &=B\int_{-\infty}^{\infty}J_c(\tau)\delta^{('')}(t-\tau)d\tau\\
+    &=B\cdot(-1)^2\frac{d^2J_c}{dt^2}|_{t=\tau}\\
+    \varepsilon(t)&=B\frac{d^2J_c}{dt^2}|_{t=\tau}
+\end{align*}
+
+We then can find this using the constitutive law for a Kelvin-Voigt material as follows.
+\begin{gather*}
+    \eta\dot{\varepsilon}+E\varepsilon=\sigma=B\psi(t)\\
+    \dot{\varepsilon}\text{ exp}( \frac{Et}{\eta})+\frac{E}{\eta}\varepsilon\text{ exp}(\frac{Et}{\eta})=\frac{B}{\eta}\psi\text{ exp}(\frac{Et}{\eta})\\
+    \frac{d}{dt}[\text{exp}(\frac{Et}{\eta})\varepsilon]=\frac{B}{\eta}\psi\text{ exp}(\frac{Et}{\eta})\\
+    \text{exp}(\frac{Et}{\eta})\varepsilon=\frac{B}{\eta}[(-1)^2\frac{E^2}{\eta^2}\text{exp}(\frac{Et}{\eta})]_{t=0}+C\\
+    \varepsilon(t)=(\frac{BE^2}{\eta^3}+C)\text{ exp}(\frac{Et}{\eta})
+\end{gather*}
+where C is a constant.
 
 \bigskip
 \subsection*{2--5. \textbf{Two-element models} [8 pts].}
@@ -128,7 +308,53 @@ Determine the strain $\epsilon(t)$ for this prescribed stress.
 \medskip
 (d) Prove that the tangent loss function $\tan\delta$ is identical between the two loading methods.
 
+\subsection*{\textbf{2-5 Solution:}}
+(\textit{a}) The constitutive law for a Kelvin-Voigt model is stated as:
+\begin{gather*}
+    \sigma(t)=\eta\dot{\varepsilon}(t)+E\varepsilon(t)
+\end{gather*}
+where $\eta$ and $E$ are material constants. Taking compression as negative strain, we can write the prescribed strain condition as
+\begin{gather*}
+    \varepsilon(t)=-\frac{d}{h}(1+\text{sin}(\omega t))
+\end{gather*}
+and we can thus find $\dot{\varepsilon}(t)$ as
+\begin{gather*}
+    \dot{\varepsilon}(t)=-\frac{\omega d}{h}\text{cos}(\omega t)
+\end{gather*}
+Plugging these into the Kelvin-Voigt material constitutive law, we get
+\begin{gather*}
+    \sigma(t)=-\frac{\eta\omega d}{h}\text{cos}(\omega t)-\frac{Ed}{h}-\frac{Ed}{h}\text{sin}(\omega t)\\
+    \sigma(t)=-\frac{d}{h}E-\frac{d}{h}(E\text{sin}(\omega t)+\eta\omega\text{cos}(\omega t))
+\end{gather*}
 
+(\textit{b}) We may combine the sine and cosine terms into one sine term using the following phase shift method.
+\begin{gather*}
+    A\text{sin}(\omega t)+B\text{cos}(\omega t)=\sqrt{A^2+B^2}(\text{sin}(\omega t + \delta))\\
+    \text{where}\quad\text{tan}(\delta)=\frac{A}{B}
+\end{gather*}
+So, rewriting our stress function, we find
+\begin{gather*}
+    \sigma(t)=-\frac{d}{h}E-\frac{d}{h}\sqrt{E^2+(\eta\omega)^2}(\text{sin}(\omega t+ \text{arctan}(\frac{E}{\eta\omega}))
+\end{gather*}
+Thus, the value of the tangent loss for this particular Kelvin-Voigt model is $\frac{E}{\eta\omega}$.
 
-
-
+(\textit{c}) Using the same constitutive law stated before, we can find strain as follows.
+\begin{gather*}
+    \sigma(t)=-\sigma_0-\sigma_0\text{sin}(\omega t)=\eta\dot{\varepsilon}+E\varepsilon\\
+    -\frac{\sigma_0}{\eta}(1+\text{sin}(\omega t))\text{exp}(\frac{Et}{\eta})=\dot{\varepsilon}(\text{exp}(\frac{Et}{\eta}))+E\varepsilon(\text{exp}(\frac{Et}{\eta}))\\
+    -\frac{\sigma_0}{\eta}\text{exp}(\frac{Et}{\eta})-\frac{\sigma_0}{\eta}\text{sin}(\omega t)\text{exp}(\frac{Et}{\eta})=\frac{d}{dt}[\varepsilon(t)(\text{exp}(\frac{Et}{\eta}))]\\
+    -\frac{\sigma_0}{E}(\text{exp}(\frac{Et}{\eta}))-\frac{\sigma_0}{\eta}[\frac{\text{exp}(\frac{Et}{\eta})}{(\frac{E}{\eta})^2+\omega^2}(\frac{E}{\eta}\text{sin}(\omega t)-\omega\text{cos}(\omega t))]+C=\varepsilon(t)(\text{exp}(\frac{Et}{\eta}))\\
+    \varepsilon(t)=-\frac{\sigma_0}{E}(\text{exp}(\frac{Et}{\eta}))-\frac{\sigma_0}{\eta}[\frac{\frac{E}{\eta}\text{sin}(\omega t)-\omega\text{cos}(\omega t)}{(\frac{E}{\eta})^2+\omega^2}]+C(\text{exp}(\frac{-Et}{\eta}))
+\end{gather*}
+C is a constant that may be found from initial conditions. We may further simplify this as was done using the phase shift equations from part (\textit{b}). Doing so, we get
+\begin{gather*}
+    \varepsilon(t)=-\frac{\sigma_0}{E}-\frac{\sigma_0}{\eta}[\frac{\text{sin}(\omega t+\text{arctan}(\frac{-E}{\eta\omega}))}{\sqrt{(\frac{E}{\eta})^2+\omega^2}}]+C(\text{exp}(\frac{-Et}{\eta})).
+\end{gather*}
+If we had an initial condition, such as strain being zero at $t=0$, then we could find a value for C. In this case, if $\epsilon(0)=0$, we'd get
+\begin{gather*}
+    C=\frac{\sigma_0}{E}+\frac{\sigma_0\text{ sin(arctan}(\frac{-E}{\eta\omega})}{\eta\sqrt{(\frac{E}{\eta})^2+\omega^2}}.
+\end{gather*}
+(\textit{d}) From the steps taken in (\textit{c}), we thus see the magnitudes of the tangent loss function are equal between these two loading methods as
+\begin{gather*}
+    |\text{tan}(\delta_1)|=|\text{tan}(\delta_2)|=\frac{E}{\eta\omega}.
+\end{gather*}

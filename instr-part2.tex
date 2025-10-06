@@ -27,7 +27,15 @@ The sections should be the following:
 
 \textit{A strong literature review outline will succinctly illustrate the essential context of the problem, the current best knowledge in the area, and the critical gap in knowledge restricting further advances or implementation, and should cite approximately 10-15 references with a \LaTeX ~bibliography.}
 
-
-%This is just a placeholder for now
-
-
+\newpage
+\section*{Project Checkpoint II: Lit Review Outline}
+\begin{outline}
+    \1 \textbf{Introductory context}
+        \2 When it comes to mechanically characterizing materials, standard testing methods (e.g. uniaxial tensile tests), while being relatively simple to run, only are able to obtain data at a few locations through sensors/gauges and rely on analytical stress distributions in simple geometries to find material properties [\cite{OlderRevMatlTesting}]. Although these tests are sufficient enough for materials such as metals, more complex tests that yield more data are required to reliably characterize materials with more complex constitutive behavior (e.g. hyperelastic or viscoelastic materials) [\cite{FunctionalMRI}, \cite{TheVirtualFieldsMethod}].
+    \1 \textbf{The state of the field}
+        \2 Full-field measurements, having become more robust and widespread in recent years, are actively replacing old standards for testing as they allow one to get more data in each test [\cite{MRuPaper1}, \cite{DICbook}]. This both decreases testing effort and increases material model accuracy.
+        \2 Designing samples through topological optimization allows for one to achieve maximum richness in data from a minimum amount of testing [\cite{TopOptEntropyBased}] when paired with the data collection of more recent full-field techniques like DIC and MR-u [\cite{BriefRevMatlTesting}, \cite{nikolov2025variationmatchingsensitivitybasedvirtualfields}].
+    \1 \textbf{The Big Gap}
+        \2 One of the greatest problems in this growing area is choosing what quantities to which you should optimize your specimen geometries. Furthermore, the lack of ample experimental validation of optimized geometries makes it difficult to be certain how well these varied choices in optimized geometries will perform in practice.
+        \2 Another issue present is the simultaneous need to bring down computation costs while ensuring the global convergence of optimized geometries, as mesh size should not play a factor in the output geometry. 
+\end{outline}
