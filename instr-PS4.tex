@@ -24,6 +24,33 @@ Say we determine the maximum deflection in the beam at different times to be
     \end{align}
 From this, calibrate the material properties.
 
+\subsection*{\textbf{4-1 Solution:}}
+A beam with a uniform applied load has the following displacement solution in elasticity:
+\begin{gather*}
+    u_y(z)=\frac{z^4-2Lz^3+L^3z}{24}\cdot\frac{1}{EI_x}\phi_0
+\end{gather*}
+where the displacement shape function is
+\begin{align*}
+    \hat{u}_y(z)=\frac{z^4-2Lz^3+L^3z}{24}
+\end{align*}.
+Through correspondence, we can the express our displacement in the viscoelastic case as
+\begin{gather*}
+    \bar{u}_y(z,s)=\frac{\hat{u}_y(z)}{I_x}\bar{\phi}(s)\cdot s \bar{J}_c(s)\\
+    \bar{u}_y(z,s)=\frac{\hat{u}_y(z)}{(\frac{1}{12}\text{ft})^4}\cdot(-3\frac{\text{lb}}{\text{ft}})\cdot\frac{1}{s}\cdot s \bar{J}_c(s)\\
+    \bar{u}_y(z,s)=\frac{\hat{u}_y(z)}{(\frac{1}{12}\text{ft})^4}\cdot(-3\frac{\text{lb}}{\text{ft}})\bar{J}_c(s)=-62,208\frac{\text{lb}}{\text{ft}^5}\cdot\hat{u}(z)\bar{J}_c(s)\\
+    u_y(z,t)=-62,208\frac{\text{lb}}{\text{ft}^5}\cdot\hat{u}(z)J_c(t).
+\end{gather*}
+Because the beam is symmetric, we know the beam will experience max displacement at the center where $z=\frac{1}{2}(4\text{ft})=2\text{ft}$. Using this value of $z$ in the shape function and plugging in the creep compliance function given, we obtain
+\begin{gather*}
+    u_{y,max}(t)=-207,360\frac{\text{lb}}{\text{ft}^4}(J_\infty + (J_0 - J_\infty) \exp\left[-\frac{t}{\tau_c}\right]) \quad [\text{ft}] 
+\end{gather*}
+We now can use the data recorded in the problem to create a system of equations and solve for our material properties. Doing so via MATLAB, we find out calibrated material properties as:
+\begin{align*}
+    &J_0=1.45\cdot 10^{-7}\quad\frac{\text{ft}^5}{\text{lb}}\\
+    &J_{\inf}=4.02\cdot10^{-7}\quad\frac{\text{ft}^5}{\text{lb}}\\
+    &\tau_c=63.83\quad\text{min}
+\end{align*}
+
 \bigskip
 \subsection*{4--2. \textbf{Ramp up the torque} [4 pts].} 
 A viscoelastic cylinder $AB$ is fixed on its end $A$ and simply supported on its opposite end at $B$. 
@@ -31,6 +58,31 @@ At point $B$, a second, rigid rod is joined to the end such that exerting a forc
 A point force of magnitude $P_0$ is applied to the rigid rod, causing the front face to turn counterclockwise. 
 The point force travels along the rod such that its distance from the bar's neutral axis $a(t)$ is direct in time, i.e., $a(t) = \alpha t$, where $\alpha$ is a constant. 
 What is the angular rotation of the end $B$ as a function of time, $\Phi(t)$?
+
+\subsection*{\textbf{4-2 Solution:}}
+First, we know the torque as a function of time will be linear such that
+\begin{gather*}
+    T_z=P_0\alpha t
+\end{gather*}
+Also, for this rod undergoing this stress, the second polar moment of area will be
+\begin{gather*}
+    J_z=\frac{\pi}{2}R^4
+\end{gather*}
+where $R$ is the radius of the cylinder. In class, we saw for a bar undergoing such a force, the derivative of the angular rotation can be expressed in the Laplace domain as
+\begin{align*}
+    \frac{d\bar{\Phi}(z,s)}{dz}&=\frac{1}{J_z}\bar{T}_z(z,s)\cdot s \bar{\mu}_c^{-1}(s)\\
+    &=\frac{2}{\pi R^4}\frac{P_0 \alpha}{s^2}\cdot s\bar{\mu}_c^{-1}(s)\\
+    &=\frac{2P_0\alpha}{\pi R^4}\frac{1}{s}\bar{\mu}_c^{-1}(s)
+\end{align*}
+We can then perform an inverse Laplace transform, then integrate this with respect to $z=L$ to obtain $\Phi (L,t)$.
+\begin{align*}
+    \frac{d\Phi(z,t)}{dz}=\frac{2P_0\alpha}{\pi R^4}\int_0^t\mu_c^{-1}(\tau)d\tau\\
+    \Phi(z=L,t)=\int_0^L(\frac{2P_0\alpha}{\pi R^4}\int_0^t\mu_c^{-1}(\tau)d\tau)dz\\
+    \Phi(z=L,t)=\frac{2P_0\alpha L}{\pi R^4}\int_0^t\mu_c^{-1}(\tau)d\tau
+\end{align*}
+
+This is the solution for the angular rotation of the bar at its end B. One could take this solution further for a given material model such as a Kelvin-Voigt or SLS model.
+
 
 \bigskip
 \subsection*{4--3. \textbf{L-shaped beam} [4 pts].}
@@ -44,6 +96,53 @@ What is the angular rotation of the end $B$ as a function of time, $\Phi(t)$?
 A one-piece polymeric member \textit{ABC} consists of two segments of length $L$ at a right angle from one-another and encastred at $A$, as shown. 
 Its neutral axes both lie in the $x-z$ plane when unloaded. 
 Assuming the creep compliance in shear to be $\mu_c(t)$ and the creep compliance in axial tension to be $E_c(t)$, determine (a) the deflection at $C$ in terms of the time-varying force $F(t)$ and (b) the stress tensor $\mathbf{\sigma}(t)$ at the square surface element located above $A$.  
+
+\subsection*{\textbf{4-3 Solution:}}
+(a) We know that from this point load force $F(t)$ there will be torsional deformation in segment \textit{AB} and bending deformation in both segments \textit{AB} and \textit{BC}. If we assume the deflection from torsion as $u_y^{torsion}(z,t)=R \Phi(t)$, we have
+\begin{align*}
+    u_y^{torsional}(z,t)&=R\frac{2z}{\pi R^4}F(t)*\mu_c^{-1}(t)\\
+    &=\frac{2z}{\pi R^3}F(t)*\mu_c^{-1}(t).
+\end{align*}
+We can find the deflection caused by bending via
+\begin{gather*}
+    u_y^{bending}(z,t)=\frac{\hat{u}_y(z)}{I_x}\phi(t)*E_c^{-1}(t)
+\end{gather*}
+where for the given force, we have the deflection shape profile
+\begin{gather*}
+    \hat{u}_y(z)=\frac{z^3-3Lz^2}{6}
+\end{gather*}
+and $\phi(t)=F(t)$. If we assume segments \textit{AB} and \textit{BC} will deflect similarly in \textit{y}, we obtain the following:
+\begin{align*}
+    u_y^{bending}(z,t)&=2\frac{z^3-3Lz^2}{6I_x}F(t)*E_c^{-1}(t)\\
+    &=\frac{z^3-3Lz^2}{3I_x}F(t)*E_c^{-1}(t)\quad ; \\
+    u_y(z,t)&=u_y^{bending}(z,t)+u_y^{torsional}(z,t)\\
+    &=\frac{z^3-3Lz^2}{3I_x}F(t)*E_c^{-1}(t)+\frac{2z}{\pi R^3}F(t)*\mu_c^{-1}(t).
+\end{align*}
+At \textit{C}, we then have 
+\begin{gather*}
+    u_y(z=L,t)=\frac{2z^3}{3I_x}F(t)*E_c^{-1}(t)+\frac{2z}{\pi R^3}F(t)*\mu_c^{-1}(t).
+\end{gather*}
+(b) We will find the stress tensor $\sigma(t)$ by finding the components of the stress tensor separately, specifically we must find the axial stress component and shear stress components. At the surface element at \textit{A}, the moment reaction will simply be the force $F(t)$ multiplied by the length of \textit{BC}. So, we can find the axial stress in Laplace transform as 
+\begin{align*}
+    \sigma_{zz}(t)&=\frac{M_x(t)R}{I_x}\\
+    &=\frac{4F(t)LR}{\pi R^4}\\
+    &=\frac{4F(t)L}{\pi R^3}
+\end{align*}
+
+We can now find the shear stress component $\sigma_{z\theta}(t)$ at the surface element as
+\begin{align*}
+    \bar{\sigma}_{z\theta}(s)&=Rs\bar{\mu}_r(s)\cdot \frac{2}{\pi R^4}\bar{F}(s)\cdot\bar{\mu}_c^{-1}(s)\\
+    &=\frac{2}{\pi R^3}\frac{1}{s}\bar{F}(s)\\
+    \sigma_{z\theta}(t)&=\frac{2}{\pi R^3}\int_0^tF(\tau)d\tau.
+\end{align*}
+Assembling our stress tensor at the surface element, we obtain:
+\begin{gather*}
+    \bm{\sigma}(t)=\begin{bmatrix}
+        0 & 0 & 0 \\
+        0 & 0 & \frac{2}{\pi R^3}\int_0^tF(\tau)d\tau \\
+        0 & \frac{2}{\pi R^3}\int_0^tF(\tau)d\tau & \frac{4F(t)L}{\pi R^3}
+    \end{bmatrix}
+\end{gather*}
 
 \newpage
 \subsection*{4--4. \textbf{Fibrous material} [4 pts].}
@@ -65,6 +164,50 @@ where $I_1(\bn{C}) = \textrm{tr}(\bn{C})$ and $I_a(\bn{C},\hat{\bm{a}}_0) = \hat
 \medskip
 (c) Find the first Piola-Kirchhoff and Cauchy stress expressions with an applied deformation gradient tensor of $\bn{F}$.
 
+\subsection*{\textbf{4-4 Solution:}}
+(a) For this elastic potential to be consistent with the principle of objectivity, we need to ensure $\widetilde{\psi}(\bm{F}^*)=\widetilde{\psi}(\bm{QF})=\widetilde{\psi}(\bm{F})$ where $\bm{Q}\in\bm{\theta}^+$.
+\begin{align*}
+    &\bm{C}=\bm{F}^\intercal\bm{F}\\
+    &\bm{C}^*=\bm{F}^\intercal\bm{Q}^\intercal\bm{QF} = \bm{F}^\intercal\bm{F} = \bm{C}
+\end{align*}
+So, it follows then that
+\begin{align*}
+    &I_1(\bm{C}^*)=I_1(\bm{C})\\
+    &I_a(\bm{C}^*,\hat{\bm{a}}_0)=I_a(\bm{C},\hat{\bm{a}}_0)
+\end{align*}
+and this model thusly is consistent with the principle of objectivity.
+
+\medskip
+(b) We need to show the conditions necessary for $\widetilde{\psi}(\bm{FH})=\widetilde{\psi}(\bm{F})$.
+\begin{align*}
+    &\bm{C}^*=\bm{H}^\intercal\bm{F}^\intercal\bm{F}\bm{H}\\
+    &\bm{C}^*=\bm{H}^\intercal\bm{C}\bm{H}\\
+    &I_1(\bm{C}^*)=\text{tr}(\bm{H}^\intercal\bm{C}\bm{H})\\
+    &I_1(\bm{C}^*)=\text{tr}(\bm{C}\bm{H}\bm{H}^\intercal)\\
+    &I_1(\bm{C}^*)=\text{tr}(\bm{C})=I_1(\bm{C})\\\\
+    &I_a(\bm{C}^*)=\hat{\bm{a}}_0\bm{H}^\intercal\cdot\bm{C}\bm{H}\hat{\bm{a}}_0
+\end{align*}
+$I_a(\bm{C}^*)=I_a(\bm{C})$ only if $\bm{H}\hat{\bm{a}}_0=\hat{\bm{a}}_0$. Thus, we have shown the material symmetry group $\mathcal{G}$ must be as stated in the problem statement.
+
+\medskip
+(c) We know the first Piola-Kirchhoff stress $\bm{P}=\frac{\partial\widetilde{\psi}}{\partial\bm{F}}$. From the First Piola-Kirchhoff stress we can then find the Cauchy stress via $\bm{\sigma}=J^{-1}\bm{P}\bm{F}^\intercal$.
+\begin{align*}
+    \bm{P}=\frac{\partial\widetilde{\psi}}{\partial\bm{F}}=\frac{\partial\widetilde{\psi}}{\partial I_1}\frac{\partial I_1}{\partial\bm{F}}+\frac{\partial\widetilde{\psi}}{\partial I_a}\frac{\partial I_a}{\partial\bm{F}}\\
+    \frac{\partial\widetilde{\psi}}{\partial I_1}=\frac{1}{2}C_{10}\\
+    \frac{\partial\widetilde{\psi}}{\partial I_a}=\frac{1}{2}kI_a\\
+    I_1=\text{tr}(\bm{C})=F_{ij}^\intercal F_{ji}=F_{ji}F_{ji}\\
+    \frac{\partial I_1}{\partial F_{mn}}=\frac{\partial(F_{ji}F_{ji})}{\partial F_{mn}}=2\delta_{jm}\delta_{ni}F_{ji}=2F_{mn}\\
+    \frac{\partial I_1}{\partial\bm{F}}=2\bm{F}\\
+    I_a=\hat{\bm{a}}_0 \cdot \bm{C} \hat{\bm{a}}_0=\hat{\bm{a}}_0\bm{F}^\intercal \cdot \bm{F} \hat{\bm{a}}_0=|\bm{F}\hat{\bm{a}}_0|^2\\
+    I_a = F_{ij}\hat{a}_{0j}F_{ik}\hat{a}_{0k}\\
+    \frac{\partial I_a}{\partial F_{mn}}=\delta_{im}\delta_{jn}\hat{a}_{0j}F_{ik}\hat{a}_{0k}+\delta_{im}\delta_{kn}F_{ij}\hat{a}_{0j}\hat{a}_{0k}=2F_{mk}\hat{a}_k\hat{a}_n\\
+    \frac{\partial I_a}{\partial\bm{F}}=2\bm{F\hat{a}}_0\otimes\bm{\hat{a}}_0\\
+    \bm{P}=C_{10}\bm{F}+k(I_a-1)\bm{F\hat{a}}_0\otimes\bm{\hat{a}}_0
+\end{align*}
+Now, we use the above relation to find $\bm{\sigma}$.
+\begin{align*}
+    \bm{\sigma}=J^{-1}C_{10}\bm{B}+J^{-1}k(I_a-1)(\bm{F}\bm{\hat{a}}_0\otimes\bm{\hat{a}}_0)\bm{F}^\intercal
+\end{align*}
 
 \bigskip
 \bigskip
@@ -76,3 +219,63 @@ The Gent model, which incorporates the finite extensibility of polymer chains in
 
 \medskip
 (b) This material undergoes a simple shear deformation of magnitude $\gamma$. Given that the shear modulus $\mu(\gamma^2) \equiv \beta_1(\gamma^2) - \beta_{-1} (\gamma^2)$ where $\beta_i$ corresponds to the expression for $\bm{\sigma}$ in Q1, show that in the small strain limit that $$\lim\limits_{\gamma \rightarrow 0} \mu(\gamma^2) = C_{10} + \frac{2}{3} C_{01}.$$
+
+\subsection*{\textbf{4-5 Solution:}}
+(a) As this free-energy function is dependent on the first and second invariants, we can obtain the Cauchy stress via $\bm{\sigma}=J^{-1}\bm{P}\bm{F}^\intercal$ where $J^{-1}=1$ because we are working with an isochoric free-energy function and $\bm{P}$ is given by
+\begin{align*}
+    \bm{P}= 2(\frac{\partial\psi}{\partial I_1}+ I_1\frac{\partial \psi}{\partial I_2})\bm{F}-2\frac{\partial\psi}{\partial I_2}\bm{BF}+2I_3\frac{\partial \psi}{\partial I_3}\bm{F}^{-\intercal}.
+\end{align*}
+We can simplify this due to there being no $I_3$ dependence, we simplify to obtain $\bm{\sigma}$ as
+\begin{align*}
+    \bm{\sigma}=2(\frac{\partial\psi}{\partial I_1}+ I_1\frac{\partial \psi}{\partial I_2})\bm{B}-2\frac{\partial \psi}{\partial I_2}(\bm{B}^2).
+\end{align*}
+To get rid of $\bm{B}^2$, we use the Cayley-Hamilton theorem to obtain
+\begin{align*}
+    \bm{\sigma}=2(\frac{\partial\psi}{\partial I_1}+ I_1\frac{\partial \psi}{\partial I_2})\bm{B}-2\frac{\partial \psi}{\partial I_2}(I_1\bm{B}-I_2\bm{I}+I_3\bm{B}^{-1})
+\end{align*}
+As we are working with an isochoric free-energy density, $I_3=\text{det}\bm{B}=1$. We can then simplify further to obtain
+\begin{align*}
+    \bm{\sigma}=2 I_2 \frac{\partial\psi}{\partial I_2}\bm{I}+2\frac{\partial\psi}{\partial I_1}\bm{B}-2\frac{\partial\psi}{\partial I_2}\bm{B}^{-1}.
+\end{align*}
+We now can find the partial derivatives of $\bar{\Psi}_{iso}$ with respect to $I_1$ and $I_2$ as
+\begin{align*}
+    &\frac{\partial\psi}{\partial I_1}=-\frac{C_{10}}{2}J_m\frac{J_m}{J_m-(I_1-3)}(-\frac{1}{J_m})=\frac{C_{10}}{2}\frac{J_m}{J_m-(I_1-3)}\\
+    &\frac{\partial\psi}{\partial I_2}=\frac{C_{01}}{I_2}.
+\end{align*}
+We plug these into our expression for $\bm{\sigma}$ as
+\begin{align*}
+    \bm{\sigma}=2C_{01}\bm{I}+\frac{C_{10}J_m}{J_m-(I_1-3)}\bm{B}-\frac{2C_{01}}{I_2}\bm{B}^{-1}.
+\end{align*}
+As this first term is a hydrostatic pressure term, we can write $2C_{01}=p$, thus yielding the desired form of
+\begin{align*}
+    \bm{\sigma}=-p\bm{I}+\frac{C_{10}J_m}{J_m-(I_1-3)}\bm{B}-\frac{2C_{01}}{I_2}\bm{B}^{-1}.
+\end{align*}
+
+\medskip
+(b) First, let us find the corresponding deformation gradient tensor and left Cauchy-Green tensor $\bm{F}$ and $\bm{B}$. For a simple shear deformation,
+\begin{align*}
+    &\bm{F}=\begin{bmatrix}
+        1 & \gamma & 0\\ 0 & 1 & 0\\ 0 & 0 & 1
+    \end{bmatrix}\\
+    &\bm{B}=\begin{bmatrix}
+        1+\gamma^2 & \gamma & 0\\ \gamma & 1 & 0\\ 0 & 0 & 1
+    \end{bmatrix}\\
+    &\bm{B}^2=\begin{bmatrix}
+        (1+\gamma^2)^2+\gamma^2 & \gamma(1+\gamma^2)+\gamma & 0 \\ \gamma(1+\gamma^2)+\gamma & \gamma^2+1 & 0\\ 0 & 0 & 1
+    \end{bmatrix}.
+\end{align*}
+Then,
+\begin{align*}
+    &I_1=\text{tr}(\bm{B})=3+\gamma^2\\
+    &I_2 = \frac{1}{2}((\text{tr}(\bm{B}))^2-\text{tr}(\bm{B}^2))=3+\gamma^2.
+\end{align*}
+Now, we may write 
+\begin{align*}
+    \mu(\gamma^2)&= \beta_1(\gamma^2) - \beta_{-1} (\gamma^2)\\
+    &=\frac{C_{10}J_m}{J_m-(3+\gamma^2-3)}+\frac{2C_{01}}{3+\gamma^2}.
+\end{align*}
+It becomes clear that in the small strain limit we do in fact arrive upon
+\begin{align*}
+    \lim\limits_{\gamma \rightarrow 0} \mu(\gamma^2) &=\frac{C_{10}J_m}{J_m-\gamma^2}+\frac{2C_{01}}{3+\gamma^2}\\
+    \lim\limits_{\gamma \rightarrow 0} \mu(\gamma^2) &= C_{10} + \frac{2}{3} C_{01}.
+\end{align*}
